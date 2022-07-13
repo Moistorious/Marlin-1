@@ -1494,15 +1494,32 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 235
-#define Y_BED_SIZE 227
+#define X_ACTUAL_BED_SIZE 235
+#define Y_ACTUAL_BED_SIZE 235
+
+#define Y_MIN_OFFSET 0
+#define X_MIN_OFFSET 0
+
+#define Y_MAX_OFFSET 8
+#define X_MAX_OFFSET 0
+
+// binder clips at start of travel (e.g. pos 0,0)
+#define Y_CLIP_START_LENGTH 0
+#define X_CLIP_START_LENGTH 0
+
+// binder clips at end of travel
+#define Y_CLIP_END_LENGTH 15
+#define X_CLIP_END_LENGTH 17
+
+#define X_BED_SIZE X_ACTUAL_BED_SIZE-X_MIN_OFFSET-X_MAX_OFFSET-X_CLIP_END_LENGTH
+#define Y_BED_SIZE Y_ACTUAL_BED_SIZE-Y_MIN_OFFSET-Y_MAX_OFFSET-Y_CLIP_END_LENGTH
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS 5
+#define X_MIN_POS X_MIN_OFFSET+X_CLIP_START_LENGTH
+#define Y_MIN_POS Y_MIN_OFFSET+Y_CLIP_START_LENGTH
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE-17
-#define Y_MAX_POS Y_BED_SIZE-20
+#define X_MAX_POS X_BED_SIZE
+#define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 250
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
